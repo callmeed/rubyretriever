@@ -58,9 +58,10 @@ module Retriever
     # Example: app.domain.com is considered an internal link to www.domain.com
     def parse_internal
       t_domain = PublicSuffix.parse(@t.host).domain
-      x_host = Addressable::URI.parse(Addressable::URI.encode(x)).host
-      x_domain = PublicSuffix.parse(x_host).domain
       links.select do |x|
+        x_host = Addressable::URI.parse(Addressable::URI.encode(x)).host
+        x_domain = PublicSuffix.parse(x_host).domain
+        
         t_domain == x_domain
       end
     end
